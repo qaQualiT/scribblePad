@@ -17,14 +17,18 @@ const Chat = () => {
     {
       _id: 123,
       partnerName: "John Doe",
-      partnerImage: userData?.profileImage || "/default-avatar.png",
+      partnerImage: userData?.profileImage 
+        ? `${process.env.REACT_APP_S3_BASE_URL}/${userData.profileImage}`
+        : "/default-avatar.png",
       specialty: "Inspector",
     },
   ]);
   const [newMessage, setNewMessage] = useState(""); // state for the new message
   const [selectUser, setSelectUser] = useState({
     _id: 123,
-    partnerImage: userData?.profileImage || "/default-avatar.png",
+    partnerImage: userData?.profileImage 
+      ? `${process.env.REACT_APP_S3_BASE_URL}/${userData.profileImage}`
+      : "/default-avatar.png",
     partnerName: userData?.name || "User",
     specialty: "Inspector",
   });
@@ -175,7 +179,9 @@ const Chat = () => {
     const newMsg = {
       message: newMessage,
       sender: {
-        profileImage: userData?.profileImage || "/default-avatar.png",
+        profileImage: userData?.profileImage 
+          ? `${process.env.REACT_APP_S3_BASE_URL}/${userData.profileImage}`
+          : "/default-avatar.png",
       },
       time: moment().format("hh:mm a"),
     };
