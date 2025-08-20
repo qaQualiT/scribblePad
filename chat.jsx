@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import userImage from "../../../assets/Images/doc.png"; // Add profile image in src/assets
 import Sendsvg from "../../Svg-componets/Sendsvg";
 import Pinsvg from "../../Svg-componets/Pinsvg";
 import { useQuery } from "@tanstack/react-query";
@@ -18,15 +17,15 @@ const Chat = () => {
     {
       _id: 123,
       partnerName: "John Doe",
-      partnerImage: userImage,
+      partnerImage: userData?.profileImage || "/default-avatar.png",
       specialty: "Inspector",
     },
   ]);
   const [newMessage, setNewMessage] = useState(""); // state for the new message
   const [selectUser, setSelectUser] = useState({
     _id: 123,
-    partnerImage: userImage,
-    partnerName: "John Doe",
+    partnerImage: userData?.profileImage || "/default-avatar.png",
+    partnerName: userData?.name || "User",
     specialty: "Inspector",
   });
   const [images, setImages] = useState([]); // array of File
@@ -176,7 +175,7 @@ const Chat = () => {
     const newMsg = {
       message: newMessage,
       sender: {
-        profileImage: userImage,
+        profileImage: userData?.profileImage || "/default-avatar.png",
       },
       time: moment().format("hh:mm a"),
     };
